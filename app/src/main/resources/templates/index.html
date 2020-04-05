@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="网络社交收藏夹| 获取知识更加便捷 |收藏夹 |网络收藏夹"/>
+    <meta name="author" content=""/>
+    <!--    <meta http-equiv="refresh" content="6;url=/lookAround" />-->
+
+    <title>网络社交收藏夹| 获取知识更加便捷</title>
+    <link rel="icon" href="/img/icon.ico" type="image/x-icon"/>
+    <!-- Bootstrap Core CSS -->
+    <link href="index/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="index/1/gede123-main.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="index/css/freelancer.min.css" rel="stylesheet"/>
+
+    <!-- Custom Fonts -->
+    <link href="index/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+    <style>
+        #portfolio .portfolio-item .portfolio-link .caption .caption-content {
+            top: 36%;
+        }
+
+        #portfolio .portfolio-item .portfolio-link .caption .caption-content p {
+            font-size: 16px;
+            line-height: 24px;
+            margin: 24px 16px 0;
+        }
+
+        #portfolio .portfolio-item .portfolio-link {
+            height: 260px;
+            overflow: hidden;
+        }
+
+        #portfolio .portfolio-item:nth-child(1) .portfolio-link {
+            background: #ba4c63;
+        }
+
+        #portfolio .portfolio-item:nth-child(2) .portfolio-link {
+            background: #1fa4b6;
+        }
+
+        #portfolio .portfolio-item:nth-child(3) .portfolio-link {
+            background: #f8a3a3;
+        }
+
+        #portfolio .portfolio-item:nth-child(4) .portfolio-link {
+            background: #1d83c1;
+        }
+
+        #portfolio .portfolio-item:nth-child(5) .portfolio-link {
+            background: #48D1CC;
+        }
+
+        #portfolio .portfolio-item:nth-child(6) .portfolio-link {
+            background: #ccb2a3;
+        }
+
+        #portfolio .portfolio-item .portfolio-link .img-responsive {
+            width: 180px;
+            height: 180px;
+            display: block;
+            border-radius: 50%;
+            margin: 40px auto;
+        }
+    </style>
+
+
+</head>
+
+<body id="page-top" class="index">
+
+<!-- Navigation -->
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand" href="#page-top">云收藏</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/lookAround">瞅一瞅</a>
+                </li>
+                <li>
+                    <a href="/login" th:unless="${user != null}">登录</a>
+                    <a href="/" th:if="${user != null}" th:text="${user.userName}" class="userName"></a>
+                </li>
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+
+
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<!-- Header -->
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <img class="img-responsive" src="index/img/profile.png" alt=""/>
+                <div class="intro-text">
+                    <span class="name">云端收藏</span>
+                    <div class="col-md-8" th:class="intro-text">
+                        <div class="gd-query-container">
+                            <form id="gd-frm" action="http://www.baidu.com/s" target="_blank">
+                                <div class="query input-group">
+                                    <div id="query-engine-list" class="input-group-btn dropdown">
+                                        <button id="query-engine" data-target="#query-engine-list"
+                                                class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                                aria-expanded="false" type="button">
+                                            <i id="show-en" class="fa fa-paw icon-fixed-width text-gray-light"></i>
+                                            百度
+                                            <span class="gd-caret margin-left-5"></span></button>
+                                        <ul id="engine-list" class="dropdown-menu dropdown-menu-search" role="menu">
+                                            <li action="engine-baidu" style="color: #333333" holder="百度一下，你就知道">
+                                                <i class="fa fa-paw icon-fixed-width text-gray-light"></i>
+                                                百度
+                                            </li>
+                                            <li action="engine-google" style="color: #333333" holder="Google 搜索">
+                                                <i class="fa fa-google icon-fixed-width text-gray-light"></i>
+                                                谷歌
+                                            </li>
+                                            <li action="engine-local" style="color: #333333" holder="站内搜索">
+                                                <i class="fa fa-laptop icon-fixed-width text-gray-light"></i>
+                                                站内
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <input id="query-input" name="wd" class="form-control" autocomplete="off"
+                                           placeholder="百度一下，你就知道">
+                                    <span class="input-group-btn">
+                                <button id="query-enter" class="btn btn-default" type="submit">
+                                    <span class="text-muted">
+                                        Enter
+                                    </span>
+                                </button>
+                            </span>
+                                </div>
+
+                                <hr class="star-light"/>
+                                <span class="skills">设备互通 - 实时同步</span><br/>
+                                <span class="skills">Lyoko项目HFUU实训设计- email:1033061893@qq.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</header>
+
+
+<!-- Portfolio Grid Section -->
+<section id="portfolio">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>云收藏的收藏家</h2>
+                <hr class="star-primary"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 portfolio-item">
+                <a href="/lookAround" class="portfolio-link" data-toggle="modal">
+                    <div class="caption">
+                        <div class="caption-content">
+                            <i class="fa fa-search-plus fa-3x"></i>
+                            <p>我是一个风骚的程序员</p>
+                        </div>
+                    </div>
+                    <img src="index/img/portfolio/cabin.png" class="img-responsive" alt=""/>
+                </a>
+            </div>
+            <div class="col-sm-4 portfolio-item">
+                <a href="/lookAround" class="portfolio-link" data-toggle="modal">
+                    <div class="caption">
+                        <div class="caption-content">
+                            <i class="fa fa-search-plus fa-3x"></i>
+                            <p>我是一个有逼格的设计师</p>
+                        </div>
+                    </div>
+                    <img src="index/img/portfolio/cake.png" class="img-responsive" alt=""/>
+                </a>
+            </div>
+            <div class="col-sm-4 portfolio-item">
+                <a href="/lookAround" class="portfolio-link" data-toggle="modal">
+                    <div class="caption">
+                        <div class="caption-content">
+                            <i class="fa fa-search-plus fa-3x"></i>
+                            <p>我是一个有风格的建筑师</p>
+                        </div>
+                    </div>
+                    <img src="index/img/portfolio/circus.png" class="img-responsive" alt=""/>
+                </a>
+            </div>
+            <div class="col-sm-4 portfolio-item">
+                <a href="/lookAround" class="portfolio-link" data-toggle="modal">
+                    <div class="caption">
+                        <div class="caption-content">
+                            <i class="fa fa-search-plus fa-3x"></i>
+                            <p>我是一个游戏狂，看看我的收藏吧！</p>
+                        </div>
+                    </div>
+                    <img src="index/img/portfolio/game.png" class="img-responsive" alt=""/>
+                </a>
+            </div>
+            <div class="col-sm-4 portfolio-item">
+                <a href="/lookAround" class="portfolio-link" data-toggle="modal">
+                    <div class="caption">
+                        <div class="caption-content">
+                            <i class="fa fa-search-plus fa-3x"></i>
+                            <p>我是一个保险柜..</p>
+                        </div>
+                    </div>
+                    <img src="index/img/portfolio/safe.png" class="img-responsive" alt=""/>
+                </a>
+            </div>
+            <div class="col-sm-4 portfolio-item">
+                <a href="/lookAround" class="portfolio-link" data-toggle="modal">
+                    <div class="caption">
+                        <div class="caption-content">
+                            <i class="fa fa-search-plus fa-3x"></i>
+                            <p>我是宅男，我喜欢潜水..</p>
+                        </div>
+                    </div>
+                    <img src="index/img/portfolio/submarine.png" class="img-responsive" alt=""/>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  <section id="portfolio">
+     <div class="container">
+         <div class="row">
+             <div class="col-lg-12 text-center">
+                 <h2>云收藏的收藏家</h2>
+                 <hr class="star-primary"/>
+             </div>
+         </div>
+         <div class="row">
+             <div th:if="${collector.mostCollectUser != null}" class="col-sm-4 portfolio-item">
+                 <a  th:href="'/collector/'+${collector.mostCollectUser.id}+'/0'" class="portfolio-link">
+                     <div class="caption">
+                         <div class="caption-content">
+                             <i class="fa fa-search-plus fa-3x"></i>
+                             <p>我收藏的文章最多，我收藏我快乐！</p>
+                             <p th:text="${collector.mostCollectUser.introduction == null ? '暂无简介' : collector.mostCollectUser.introduction.length() gt 15 ? collector.mostCollectUser.introduction.substring(0,15)+'...' : collector.mostCollectUser.introduction}">暂无简介</p>
+                         </div>
+                     </div>
+                     <img th:src="@{(${collector.mostCollectUser.profilePicture} == null ? @{/index/img/portfolio/cabin.png}:'/'+${collector.mostCollectUser.profilePicture})}" alt="" class="img-responsive"/>
+                 </a>
+             </div>
+             <div th:if="${collector.mostFollowedUser != null}" class="col-sm-4 portfolio-item">
+                 <a th:href="'/collector/'+${collector.mostFollowedUser.id}+'/0'" class="portfolio-link">
+                     <div class="caption">
+                         <div class="caption-content">
+                             <i class="fa fa-search-plus fa-3x"></i>
+                             <p>关注我的人最多,我是人气王！</p>
+                             <p th:text="${collector.mostFollowedUser.introduction == null ? '暂无简介' : collector.mostFollowedUser.introduction.length() gt 15 ? collector.mostFollowedUser.introduction.substring(0,15)+'...' : collector.mostFollowedUser.introduction}">暂无简介</p>
+                         </div>
+                     </div>
+                     <img th:src="@{(${collector.mostFollowedUser.profilePicture} == null ? @{/index/img/portfolio/cake.png}:'/'+${collector.mostFollowedUser.profilePicture})}" alt="" class="img-responsive"/>
+                 </a>
+             </div>
+             <div th:if="${collector.mostPraisedUser != null}" class="col-sm-4 portfolio-item">
+                 <a th:href="'/collector/'+${collector.mostPraisedUser.id}+'/0'" class="portfolio-link">
+                     <div class="caption">
+                         <div class="caption-content">
+                             <i class="fa fa-search-plus fa-3x"></i>
+                             <p>赞我文章的人最多，大家都来赞赞赞！</p>
+                             <p th:text="${collector.mostPraisedUser.introduction == null ? '暂无简介' : collector.mostPraisedUser.introduction.length() gt 15 ? collector.mostPraisedUser.introduction.substring(0,15)+'...' : collector.mostPraisedUser.introduction}">暂无简介</p>
+                         </div>
+                     </div>
+                     <img th:src="@{(${collector.mostPraisedUser.profilePicture} == null ? @{/index/img/portfolio/circus.png}:'/'+${collector.mostPraisedUser.profilePicture})}" alt="" class="img-responsive"/>
+                 </a>
+             </div>
+             <div th:if="${collector.mostCommentedUser != null}" class="col-sm-4 portfolio-item">
+                 <a  th:href="'/collector/'+${collector.mostCommentedUser.id}+'/0'" class="portfolio-link">
+                     <div class="caption">
+                         <div class="caption-content">
+                             <i class="fa fa-search-plus fa-3x"></i>
+                               <p>评论我文章的人最多，快看我收藏了什么！</p>
+                               <p th:text="${collector.mostCommentedUser.introduction == null ? '暂无简介' : collector.mostCommentedUser.introduction.length() gt 15 ? collector.mostCommentedUser.introduction.substring(0,15)+'...' : collector.mostCommentedUser.introduction}">暂无简介</p>
+                         </div>
+                     </div>
+                     <img th:src="@{(${collector.mostCommentedUser.profilePicture} == null ? @{/index/img/portfolio/game.png}:'/'+${collector.mostCommentedUser.profilePicture})}" alt="" class="img-responsive"/>
+                 </a>
+             </div>
+             <div th:if="${collector.mostPopularUser != null}"  class="col-sm-4 portfolio-item">
+                 <a th:href="'/collector/'+${collector.mostPopularUser.id}+'/0'" class="portfolio-link">
+                     <div class="caption">
+                         <div class="caption-content">
+                             <i class="fa fa-search-plus fa-3x"></i>
+                              <p>我最受欢迎，想不想关注我！</p>
+                              <p th:text="${collector.mostPopularUser.introduction == null ? '暂无简介' : collector.mostPopularUser.introduction.length() gt 15 ? collector.mostPopularUser.introduction.substring(0,15)+'...' : collector.mostPopularUser.introduction}">暂无简介</p>
+                         </div>
+                     </div>
+                     <img th:src="@{(${collector.mostPopularUser.profilePicture} == null ? @{/index/img/portfolio/safe.png}:'/'+${collector.mostPopularUser.profilePicture})}" alt="" class="img-responsive"/>
+                 </a>
+             </div>
+             <div th:if="${collector.mostActiveUser != null}" class="col-sm-4 portfolio-item">
+                 <a th:href="'/collector/'+${collector.mostActiveUser.id}+'/0'" class="portfolio-link">
+                     <div class="caption">
+                         <div class="caption-content">
+                             <i class="fa fa-search-plus fa-3x"></i>
+                              <p>近一个月我最活跃，快来超越我！</p>
+                             <p th:text="${collector.mostActiveUser.introduction == null ? '暂无简介' : collector.mostActiveUser.introduction.length() gt 15 ? collector.mostActiveUser.introduction.substring(0,15)+'...' : collector.mostActiveUser.introduction}">暂无简介</p>
+                         </div>
+                     </div>
+                     <img th:src="@{(${collector.mostActiveUser.profilePicture} == null ? @{/index/img/portfolio/submarine.png}:'/'+${collector.mostActiveUser.profilePicture})}" alt="" class="img-responsive"/>
+                 </a>
+             </div>
+         </div>
+     </div>
+ </section>-->
+
+<!-- About Section -->
+<section class="success" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>关于项目</h2>
+                <hr class="star-light"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-2">
+                <p>做了一个在线收藏网页的网站
+                    <br/>不同设备可以实时同步数据，通过平台还可以发现别人收藏的文章，并且可以点赞评论。
+                    <br/>可以通过导入收藏夹的功能，把别的浏览器的书签批量导入到该网站中。
+                    <br/>根据共同的收藏，可以找到相同领域兴趣的人。
+                </p>
+            </div>
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <a href="https://github.com/cloudfavorites" class="btn btn-lg btn-outline">
+                    <i class="fa fa-download"></i> GITHUB--关注我们
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Contact Section -->
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>项目功能</h2>
+                <hr class="star-primary"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <br/><br/><br/>
+
+                <p>
+                </p>
+                <p>
+                    <strong>核心功能点：</strong>
+                    <br/> 该项目使用Spring boot + VUE + Mysql 搭建而成
+                    <br/> 与数据库交互使用了Hibernate来实现。
+                    <br/> 前端交互主要使用JS响应用户操作和AJAX来调用后端接口。
+                    <br/> 本项目集成了Swagger，Swagger地址为 http://项目IP:项目端口/swagger-ui.html (例如
+                    http://127.0.0.1:8080/swagger-ui.html)
+                </p>
+                <p>
+                    联系方式：<br/><br/>
+                    1、邮件
+                    <a href="mailto:cloudfavorites@126.com">
+                        1033061893@qq.com
+                    </a>
+                    <br/>
+                    2、Lyoko的主页
+                    <a href="https://lyokom.github.io/">
+                        Lyoko's Blog
+                    </a>
+                    <br/>
+                    3、如果您觉得还有完善的地方，<a href="/feedback">请给我们提建议！</a>
+                </p>
+                <p>
+                    本项目是工程实训项目 TODO: 增加文章分类功能，增加朴素贝叶斯分类器功能
+                </p>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="text-center">
+    <div class="footer-above">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col col-md-4">
+                    <h3>位置</h3>
+                    <p>银河系
+                        <br./>
+                        安徽省，合肥市，HFUU
+                    </p>
+                </div>
+                <div class="footer-col col-md-4">
+                    <h3>联系我们</h3>
+                    <ul class="list-inline">
+                        <li>
+                            <img src="https://lastfm.freetls.fastly.net/i/u/270x205/7533899db2cc45d88c85b3544e53af0c.jpg"
+                                 style="width: 60%;"/>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-col col-md-4">
+                    <h3>关于网站</h3>
+                    <p>--------------------------------</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-below">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    Copyright &copy; favorites 2016-2019
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+<div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
+    <a class="btn btn-primary" href="#page-top">
+        <i class="fa fa-chevron-up"></i>
+    </a>
+</div>
+
+
+
+
+
+<!-- jQuery -->
+<script src="index/vendor/jquery/jquery.min.js"></script>
+<!--<script src="index/1/jquery.min.js"></script>-->
+
+<script src="index/1/jquery.cookie.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+<script src="index/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+<!-- Contact Form JavaScript -->
+<script src="index/js/jqBootstrapValidation.js"></script>
+<script src="index/js/contact_me.js"></script>
+<script src="index/1/gede123-main.min.js"></script>
+<script src="index/1/gede123-init.min.js"></script>
+<!-- Theme JavaScript -->
+<script src="index/js/freelancer.min.js"></script>
+<div style="display:none">
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan id='cnzz_stat_icon_1260466344'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260466344' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+<script>
+    //页面加载完成后调用
+    $(window).load(function () {
+        initDataAll();
+    });
+</script>
+
+
+</body>
+
+</html>
